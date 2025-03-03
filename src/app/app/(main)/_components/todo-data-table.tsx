@@ -38,14 +38,13 @@ import { useRouter } from "next/navigation";
 import { deleteTodo, upsertTodo } from "../actions";
 import { toast } from "sonner";
 
-
 type TodoDataTable = {
   data: Todo[];
 };
 
 export function TodoDataTable({ data }: TodoDataTable) {
-  const router = useRouter()
-  
+  const router = useRouter();
+
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
@@ -55,25 +54,25 @@ export function TodoDataTable({ data }: TodoDataTable) {
   const [rowSelection, setRowSelection] = React.useState({});
 
   const handleDeleteTodo = async (todo: Todo) => {
-    await deleteTodo({ id: todo.id })
-    router.refresh()
+    await deleteTodo({ id: todo.id });
+    router.refresh();
 
-    toast('Deletion Successful', {
-      description: 'The todo item has been successfully deleted.'
-    })
-  }
+    toast("Deletion Successful", {
+      description: "The todo item has been successfully deleted.",
+    });
+  };
 
   const handleToggleDoneTodo = async (todo: Todo) => {
-    const doneAt = todo.doneAt ? null : new Date().toISOString()
+    const doneAt = todo.doneAt ? null : new Date().toISOString();
 
-    await upsertTodo({ id: todo.id, doneAt })
-    router.refresh()
+    await upsertTodo({ id: todo.id, doneAt });
+    router.refresh();
 
-    toast('Update Successful', {
-      description: 'The todo item has been successfully updated.'
-    })
-  }
-  
+    toast("Update Successful", {
+      description: "The todo item has been successfully updated.",
+    });
+  };
+
   const columns: ColumnDef<Todo>[] = [
     {
       accessorKey: "status",
@@ -82,7 +81,7 @@ export function TodoDataTable({ data }: TodoDataTable) {
         const { doneAt } = row.original;
         const status: "done" | "waiting" = doneAt ? "done" : "waiting";
         const variant: "outline" | "default" = doneAt ? "outline" : "default";
-  
+
         return <Badge variant={variant}>{status}</Badge>;
       },
     },
@@ -117,7 +116,7 @@ export function TodoDataTable({ data }: TodoDataTable) {
       enableHiding: false,
       cell: ({ row }) => {
         const todo = row.original;
-  
+
         return (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -134,14 +133,10 @@ export function TodoDataTable({ data }: TodoDataTable) {
                 Copy todo ID
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem
-              onClick={() => handleToggleDoneTodo(todo)}
-              >
+              <DropdownMenuItem onClick={() => handleToggleDoneTodo(todo)}>
                 Mack as done
               </DropdownMenuItem>
-              <DropdownMenuItem
-              onClick={() => handleDeleteTodo(todo)}
-              >
+              <DropdownMenuItem onClick={() => handleDeleteTodo(todo)}>
                 Delete
               </DropdownMenuItem>
             </DropdownMenuContent>
