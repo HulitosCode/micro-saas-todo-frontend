@@ -1,5 +1,12 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 
 const Page = () => {
@@ -8,7 +15,7 @@ const Page = () => {
       <CardHeader className="border-b border-border">
         <CardTitle>Plan Usage</CardTitle>
         <CardDescription>
-          You are currently on the [current_plan]. Current billing cycle:{''}
+          You are currently on the [current_plan]. Current billing cycle:{""}
           [next_due_date].
         </CardDescription>
       </CardHeader>
@@ -28,7 +35,7 @@ const Page = () => {
         <Button>Upgrade to PRO</Button>
       </CardFooter>
     </Card>
-  )
+  );
 };
 
 export default Page;
